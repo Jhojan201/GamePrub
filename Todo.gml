@@ -356,9 +356,92 @@ if((place_meeting_rounded(x,y+1,obj_wall) || position_meeting_rounded(x,y+2,obj_
 ///MECANICAS EN EL AIREXD
 
 
+  //////////////////////////////////////////MARIOCAMINASTEP////////////////////////////////////////////////MARIO
   
+  ///Properties BOMBILLITA
+grav=.25;
+max_grav=10;
+stick_to_ground=false;
+
+slide_factor=2;
+
+walk_max=2;
+walk_accel=.1;
+run_max=4;
+run_accel=.1;
+//Air Control
+air_control_enabled=true;
+air_x_accel=walk_accel; //How easy is it to move in the air.
+jump_strength=5;
+jump_hold_limit=15;
+//Changing Variables
+x_speed=0;
+y_speed=0;
+
+//General Helpers
+timer=0;
+
+scale=1;
   
-  
-  
-  
+  ///Controls
+//Directions
+up_held=false;
+down_held=false;
+left_held=false;
+right_held=false;
+
+//Mobility
+run_held=false;
+jump_pressed=false;
+jump_held=false;
+jump_released=false;
+
+///Setup State Machine for Platform Boy
+state_machine_init();
+
+//Define States
+state_create("Stand",pb_state_stand);
+state_create("Walk",pb_state_walk);
+state_create("Air",pb_state_air);
+//Set the default state
+state_init("Stand");
+
+
+///////////////////////////////STEP
+///Read Controls
+//Directions
+up_held=keyboard_check(vk_up);
+down_held=keyboard_check(vk_down);
+left_held=keyboard_check(vk_left);
+right_held=keyboard_check(vk_right);
+
+//Mobility
+run_held=keyboard_check(vk_shift)
+jump_pressed=keyboard_check_pressed(vk_space);
+jump_held=keyboard_check(vk_space);
+jump_released=keyboard_check_released(vk_space);
+
+//
+///Execute Script code.
+state_execute();
+
+
+///ENDSTATE/
+///Update State
+state_update();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   
